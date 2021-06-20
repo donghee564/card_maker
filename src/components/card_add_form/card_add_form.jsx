@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
-import Button from "../button/button";
-import styles from "./card_add_form.module.css";
+import React, { useRef, useState } from 'react';
+import styles from './card_add_form.module.css';
+import Button from '../button/button';
 
 const CardAddForm = ({ FileInput, onAdd }) => {
   const formRef = useRef();
@@ -12,31 +12,31 @@ const CardAddForm = ({ FileInput, onAdd }) => {
   const messageRef = useRef();
   const [file, setFile] = useState({ fileName: null, fileURL: null });
 
-  const onFileChange = (file) => {
+  const onFileChange = file => {
+    console.log(file);
     setFile({
       fileName: file.name,
       fileURL: file.url,
     });
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = event => {
     event.preventDefault();
     const card = {
-      id: Date.now(),
-      name: nameRef.current.value || "",
-      company: companyRef.current.value || "",
+      id: Date.now(), //uuid
+      name: nameRef.current.value || '',
+      company: companyRef.current.value || '',
       theme: themeRef.current.value,
-      title: titleRef.current.value || "",
-      email: emailRef.current.value || "",
-      message: messageRef.current.value || "",
-      fileName: file.fileName || "",
-      fileURL: file.fileURL || "",
+      title: titleRef.current.value || '',
+      email: emailRef.current.value || '',
+      message: messageRef.current.value || '',
+      fileName: file.fileName || '',
+      fileURL: file.fileURL || '',
     };
-    formRef.current.reset(); //사용자가 폼을 제출하고나면 리셋
+    formRef.current.reset();
     setFile({ fileName: null, fileURL: null });
     onAdd(card);
   };
-
   return (
     <form ref={formRef} className={styles.form}>
       <input
@@ -57,7 +57,7 @@ const CardAddForm = ({ FileInput, onAdd }) => {
         ref={themeRef}
         className={styles.select}
         name="theme"
-        placeholder="theme"
+        placeholder="Theme"
       >
         <option placeholder="light">light</option>
         <option placeholder="dark">dark</option>
@@ -68,21 +68,21 @@ const CardAddForm = ({ FileInput, onAdd }) => {
         className={styles.input}
         type="text"
         name="title"
-        placeholder="title"
+        placeholder="Title"
       />
       <input
         ref={emailRef}
         className={styles.input}
         type="text"
         name="email"
-        placeholder="email"
+        placeholder="Email"
       />
       <textarea
         ref={messageRef}
         className={styles.textarea}
         name="message"
-        placeholder="message"
-      ></textarea>
+        placeholder="Message"
+      />
       <div className={styles.fileInput}>
         <FileInput name={file.fileName} onFileChange={onFileChange} />
       </div>
